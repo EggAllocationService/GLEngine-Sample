@@ -8,3 +8,5 @@ add_subdirectory(engine)
 add_executable(sample main.cpp)
 
 target_link_libraries(sample glengine)
+
+engine_copy_dll(sample)
