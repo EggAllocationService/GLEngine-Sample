@@ -25,8 +25,6 @@ public:
 };
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-
     auto engine = new Engine("GLEngine Sample", int2(1280, 720));
     engine->SetAllowNonFocusedPawnInput(true);
 
