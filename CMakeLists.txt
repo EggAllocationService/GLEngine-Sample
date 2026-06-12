@@ -22,9 +22,11 @@ build_pak(
         SOURCES
             assets/pyramid.obj
             assets/end_portal.png
+            assets/end_noise.png
         NAMES
             /pyramid.obj
             /portal.png
+            /noise.png
 )
 
 target_link_libraries(sample glengine DemoShaders)

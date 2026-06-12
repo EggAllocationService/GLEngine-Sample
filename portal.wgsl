@@ -21,6 +21,14 @@ var starfield: texture_2d<f32>;
 @binding(1)
 var samp: sampler;
 
+@group(1)
+@binding(2)
+var noise: texture_2d<f32>;
+
+@group(1)
+@binding(3)
+var noiseSamp: sampler;
+
 var<immediate> m: ModelData;
 
 struct VertexIn {
@@ -50,8 +58,8 @@ fn rotation2D(theta: f32) -> mat3x3f {
 }
 
 const SCALE_TRANSLATE: mat3x3f = mat3x3f(
-    0.2, 0.0, 0.0,
-    0.0, 0.2, 0.0,
+    0.15, 0.0, 0.0,
+    0.0, 0.15, 0.0,
     0.25, 0.25, 1.0,
 );
 
@@ -95,11 +103,11 @@ const COLORS = array(
 
 @fragment
 fn fs(i: VertexOut) -> @location(0) vec4f {
+        
+    var color = textureSample(noise, noiseSamp, i.uv).xyz * COLORS[0] * 0.1;
 
-    var color = 0.01 * COLORS[0];
-
-    for (var j:u32 = 1; j < 16; j++) {
-        let transform = portal_layer(f32(j));
+    for (var j:u32 = 0; j < 16; j++) {
+        let transform = portal_layer(f32(j + 1));
         let coords = transform * vec3f(i.uv, 1);
         let uv = coords.xy / coords.z;
         let intensity = textureSample(starfield, samp, uv).xyz;
