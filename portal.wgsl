@@ -58,9 +58,9 @@ fn rotation2D(theta: f32) -> mat3x3f {
 }
 
 const SCALE_TRANSLATE: mat3x3f = mat3x3f(
-    0.15, 0.0, 0.0,
-    0.0, 0.15, 0.0,
-    0.25, 0.25, 1.0,
+    0.5, 0.0, 0.0,
+    0.0, 0.5, 0.0,
+    1, 1, 1.0,
 );
 
 fn portal_layer(layer: f32) -> mat3x3f {
@@ -103,10 +103,9 @@ const COLORS = array(
 
 @fragment
 fn fs(i: VertexOut) -> @location(0) vec4f {
-        
     var color = textureSample(noise, noiseSamp, i.uv).xyz * COLORS[0] * 0.1;
 
-    for (var j:u32 = 0; j < 16; j++) {
+    for (var j:u32 = 0; j < 14; j++) {
         let transform = portal_layer(f32(j + 1));
         let coords = transform * vec3f(i.uv, 1);
         let uv = coords.xy / coords.z;
