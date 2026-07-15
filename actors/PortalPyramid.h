@@ -14,6 +14,7 @@ public:
     void Update(double deltaTime) override;
 private:
     std::shared_ptr<PortalMeshComponent> mesh;
+    float rotation;
 };
 
 
